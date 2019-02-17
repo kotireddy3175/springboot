@@ -1,0 +1,45 @@
+<form class="example-form" [formGroup]="combinationForm" (ngSubmit)="generate()" novalidate>
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="MobileNo" formControlName="mobileNo" name="mobileNo">
+               <mat-error *ngIf="combinationForm.get('mobileNo').hasError('pattern')">
+                Please Enter <strong>Valid</strong> MobileNo 
+               </mat-error>   
+             <mat-error *ngIf="combinationForm.get('mobileNo').hasError('required')">
+              MobileNo is <strong>required</strong>
+            </mat-error> 
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <button mat-raised-button  color="primary" [disabled]="!combinationForm.valid" >Generate</button>
+</form>
+<br>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">    
+    <!-- Index Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>    
+    <!-- MobileNo Column -->
+    <ng-container matColumnDef="MobileNo">
+      <th mat-header-cell *matHeaderCellDef> MobileNo </th>
+      <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+    </ng-container>       
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>    
+  <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100,200,500,1000,1500]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+
+
+
+
+
+
